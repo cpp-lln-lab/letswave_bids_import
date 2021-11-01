@@ -2,3 +2,7 @@
 	path = lib/bids-matlab
 	url = git@github.com:bids-standard/bids-matlab.git
 	datalad-url = git@github.com:bids-standard/bids-matlab.git
+[submodule "tests/data/eeg_bids_conversion"]
+	path = tests/data/eeg_bids_conversion
+	url = git@github.com:cpp-lln-lab/eeg_bids_conversion.git
+	datalad-url = git@github.com:cpp-lln-lab/eeg_bids_conversion.git
