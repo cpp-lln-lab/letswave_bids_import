@@ -1,25 +1,25 @@
-%
-% 1 - Check if version requirements
-% are satisfied and the packages are
-% are installed/loaded:
-%   Octave > 4
-%       - image
-%       - optim
-%       - struct
-%       - statistics
-%
-%   MATLAB >= R2015b
-%
-% 2 - Add project to the O/M path
-
-function initEnv
+function init_env()
+    %
+    % 1 - Check if version requirements
+    % are satisfied and the packages are
+    % are installed/loaded:
+    %   Octave > 4
+    %       - image
+    %       - optim
+    %       - struct
+    %       - statistics
+    %
+    %   MATLAB >= R2015b
+    %
+    % 2 - Add project to the O/M path
+    % (C) Copyright 2021 Remi Gau
 
     octaveVersion = '4.0.3';
     matlabVersion = '8.6.0';
 
     installlist = {'io', 'statistics', 'image'};
 
-    if isOctave
+    if is_octave
 
         % Exit if min version is not satisfied
         if ~compare_versions(OCTAVE_VERSION, octaveVersion, '>=')
@@ -28,16 +28,16 @@ function initEnv
 
         for ii = 1:length(installlist)
 
-            packageName = installlist{ii};
+            package_name = installlist{ii};
 
             try
                 % Try loading Octave packages
-                disp(['loading ' packageName]);
-                pkg('load', packageName);
+                disp(['loading ' package_name]);
+                pkg('load', package_name);
 
             catch
 
-                tryInstallFromForge(packageName);
+                try_install_from_forge(package_name);
 
             end
         end
@@ -59,14 +59,14 @@ function initEnv
                'Try this in your terminal:', ...
                ' git submodule update --recursive ']);
     else
-        addDependencies();
+        add_dependencies();
     end
 
     disp('Correct matlab/octave verions and added to the path!');
 
 end
 
-function retval = isOctave
+function retval = is_octave
     % Return: true if the environment is Octave.
     persistent cacheval   % speeds up repeated calls
 
@@ -78,13 +78,13 @@ function retval = isOctave
 
 end
 
-function tryInstallFromForge(packageName)
+function try_install_from_forge(package_name)
 
     errorcount = 1;
     while errorcount % Attempt twice in case installation fails
         try
-            pkg('install', '-forge', packageName);
-            pkg('load', packageName);
+            pkg('install', '-forge', package_name);
+            pkg('load', package_name);
             errorcount = 0;
         catch err
             errorcount = errorcount + 1;
@@ -96,10 +96,10 @@ function tryInstallFromForge(packageName)
 
 end
 
-function addDependencies()
+function add_dependencies()
 
     pth = fileparts(mfilename('fullpath'));
-    addpath(genpath(fullfile(pth, 'lib')));
+    addpath(fullfile(pth, 'lib', 'bids-matlab'));
     addpath(genpath(fullfile(pth, 'src')));
 
 end
