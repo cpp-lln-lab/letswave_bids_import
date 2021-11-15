@@ -12,6 +12,7 @@ function init_env()
     %   MATLAB >= R2015b
     %
     % 2 - Add project to the O/M path
+    %
     % (C) Copyright 2021 Remi Gau
 
     octaveVersion = '4.0.3';

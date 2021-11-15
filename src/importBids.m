@@ -1,4 +1,4 @@
-function import_bids(cfg)
+function importBids(cfg)
     %
     %
     %
@@ -14,6 +14,8 @@ function import_bids(cfg)
     cfg.use_schema = true;
 
     cfg.filter = struct();
+
+    printCredits(cfg);
 
     BIDS = bids.layout(cfg.bidsroot);
 
@@ -51,12 +53,23 @@ function import_bids(cfg)
 
                 configuration.parameters.filenames = {files{iFile}};
 
-                [~, datasets] = LW_import_BDF('process', configuration);
+                [~, datasets] = LW_import_SET('process', configuration);
 
                 save_data(files{iFile}, datasets);
 
                 delete(files{iFile});
 
+            case '.bdf'                
+                configuration = LW_import_BDF('default');
+
+                configuration.parameters.filenames = {files{iFile}};
+
+                [~, datasets] = LW_import_BDF('process', configuration);
+
+                save_data(files{iFile}, datasets);
+
+                delete(files{iFile});
+                
             otherwise
                 % TODO
                 warning('FORMAT NOT YET SUPPORTED');

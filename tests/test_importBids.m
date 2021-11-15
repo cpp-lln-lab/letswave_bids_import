@@ -1,4 +1,4 @@
-function test_suite = test_import_bids %#ok<*STOUT>
+function test_suite = test_importBids %#ok<*STOUT>
     % (C) Copyright 2021 Remi Gau
     try % assignment of 'localfunctions' is necessary in Matlab >= 2016
         test_functions = localfunctions(); %#ok<*NASGU>
@@ -7,24 +7,49 @@ function test_suite = test_import_bids %#ok<*STOUT>
     initTestSuite;
 end
 
-function test_import_bids_basic()
+function test_import_bids_eeglab()
 
-    clean_dir();
-
-    cfg.out_path = fullfile(this_dir(), 'output');
+    cfg.out_path = fullfile(this_dir(), 'output', 'eeglab');
+    
+    clean_dir(cfg.out_path);
 
     cfg.bidsroot = fullfile(return_test_data_dir(), 'eeglab');
 
     initialize_letswave();
     close all;
 
-    import_bids(cfg);
+    importBids(cfg);
+    
+    % TODO 
+    % add tests
+    
+%     clean_dir();
 
 end
 
-function clean_dir()
-    if exist(fullfile(this_dir(), 'output'), 'dir')
-        rmdir(fullfile(this_dir(), 'output'), 's');
+function test_import_bids_biosemi()
+
+    cfg.out_path = fullfile(this_dir(), 'output', 'biosemi');
+    
+    clean_dir(cfg.out_path);
+
+    cfg.bidsroot = fullfile(return_test_data_dir(), 'spm_multimodal');
+
+    initialize_letswave();
+    close all;
+
+    importBids(cfg);
+    
+    % TODO 
+    % add tests
+    
+%     clean_dir();
+
+end
+
+function clean_dir(this_dir)
+    if exist(this_dir, 'dir')
+        rmdir(this_dir, 's');
     end
 end
 

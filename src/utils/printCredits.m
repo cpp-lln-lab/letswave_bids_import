@@ -1,4 +1,4 @@
-function repoURL = printCredits(cfg)
+function printCredits(cfg)
     %
     % TODO: use the .zenodo.json to load contributors
     %
