@@ -59,7 +59,7 @@ function importBids(cfg)
 
                 delete(files{iFile});
 
-            case '.bdf'                
+            case '.bdf'
                 configuration = LW_import_BDF('default');
 
                 configuration.parameters.filenames = {files{iFile}};
@@ -69,7 +69,7 @@ function importBids(cfg)
                 save_data(files{iFile}, datasets);
 
                 delete(files{iFile});
-                
+
             otherwise
                 % TODO
                 warning('FORMAT NOT YET SUPPORTED');
