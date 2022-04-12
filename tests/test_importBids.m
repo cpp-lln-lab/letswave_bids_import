@@ -10,7 +10,7 @@ end
 function test_import_bids_eeglab()
 
     cfg.out_path = fullfile(this_dir(), 'output', 'eeglab');
-    
+
     clean_dir(cfg.out_path);
 
     cfg.bidsroot = fullfile(return_test_data_dir(), 'eeglab');
@@ -19,18 +19,18 @@ function test_import_bids_eeglab()
     close all;
 
     importBids(cfg);
-    
-    % TODO 
+
+    % TODO
     % add tests
-    
-%     clean_dir();
+
+    %     clean_dir();
 
 end
 
 function test_import_bids_biosemi()
 
     cfg.out_path = fullfile(this_dir(), 'output', 'biosemi');
-    
+
     clean_dir(cfg.out_path);
 
     cfg.bidsroot = fullfile(return_test_data_dir(), 'spm_multimodal');
@@ -39,11 +39,11 @@ function test_import_bids_biosemi()
     close all;
 
     importBids(cfg);
-    
-    % TODO 
+
+    % TODO
     % add tests
-    
-%     clean_dir();
+
+    %     clean_dir();
 
 end
 
